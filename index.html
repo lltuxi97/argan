@@ -13,8 +13,8 @@
         :root {
             --bg-deep: #220e24;         
             --bg-card: #32163b;         
-            --gold-primary: #d4af37;   
-            --gold-light: #fbe5b5;      
+            --gold-primary: #d4af37;    
+            --gold-light: #fbe5b5;       
             --text-white: #ffffff;
             --text-gray: #e0d0e3;
             --magic-glow: 0 0 15px rgba(212, 175, 55, 0.4);
@@ -156,6 +156,36 @@
             100% { top: 25px; opacity: 0; }
         }
 
+        /* ==================== شريط الماركي الفاخر (Luxury Marquee) ==================== */
+        .luxury-marquee {
+            background: var(--gold-primary);
+            padding: 12px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            direction: ltr; 
+        }
+        .marquee-track {
+            display: inline-block;
+            animation: scrollText 20s linear infinite;
+        }
+        .marquee-text {
+            font-family: 'El Messiri', serif;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--bg-deep); /* لون بنفسجي غامق على خلفية ذهبية */
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin: 0 40px;
+            display: inline-block;
+        }
+        @keyframes scrollText {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); } 
+        }
+
         /* ==================== الأقسام الأخرى ==================== */
         .brands-section { padding: 40px 0; background: rgba(0,0,0,0.2); overflow: hidden; white-space: nowrap; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
         .brands-track { display: inline-block; animation: slide 20s linear infinite; }
@@ -291,9 +321,24 @@
             border-radius: 20px; padding: 40px; text-align: center;
             max-width: 800px; margin: 0 auto; box-shadow: 0 0 30px rgba(212, 175, 55, 0.1);
         }
-        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-top: 30px; }
+        /* كود خاص للرقم لجعله متناسق */
+        .phone-display {
+            color: #ffffff;
+            font-size: 2.2rem; /* تم تصغيره ليكون مناسباً */
+            font-weight: bold;
+            font-family: sans-serif;
+            text-decoration: none;
+            letter-spacing: 1px;
+            display: block;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+        .phone-display:hover { color: var(--gold-primary); transform: scale(1.05); }
+
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; margin-top: 30px; }
         .info-item h4 { color: var(--gold-primary); margin-bottom: 10px; font-size: 1.2rem; }
         .info-item p, .info-item a { color: #e0d0e3; font-size: 1rem; line-height: 1.6; text-decoration: none; }
+        
         .map-btn {
             display: inline-block; margin-top: 10px; padding: 5px 15px;
             border: 1px solid var(--text-gray); border-radius: 20px;
@@ -336,6 +381,26 @@
             .hero { padding-top: 100px; }
             .glow-orb { opacity: 0.15; } /* تخفيف الإضاءة في الجوال */
         }
+
+        /* رسالة الترحيب (الفقاعة) */
+        .welcome-bubble {
+            position: fixed; bottom: 35px; right: 100px;
+            background: #fff; color: #220e24;
+            padding: 10px 15px; border-radius: 20px 20px 0 20px;
+            font-size: 0.9rem; font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 998; opacity: 0; transform: translateX(20px);
+            animation: slideInBubble 1s ease-out 3s forwards; /* تظهر بعد 3 ثواني */
+            pointer-events: none;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .welcome-bubble i { color: var(--gold-primary); font-size: 1.1rem; }
+        .welcome-bubble::after {
+            content: ''; position: absolute; right: -8px; bottom: 15px;
+            border-width: 8px 0 8px 8px; border-style: solid;
+            border-color: transparent transparent transparent #fff;
+        }
+        @keyframes slideInBubble { to { opacity: 1; transform: translateX(0); } }
     </style>
 </head>
 <body>
@@ -372,6 +437,19 @@
             <span style="font-size: 0.8rem; color: var(--gold-primary);">اكتشفي المزيد</span>
         </div>
     </section>
+
+    <div class="luxury-marquee">
+        <div class="marquee-track">
+            <span class="marquee-text">Luxury • Beauty • Spa</span>
+            <span class="marquee-text">Luxury • Beauty • Spa</span>
+            <span class="marquee-text">Luxury • Beauty • Spa</span>
+            <span class="marquee-text">Luxury • Beauty • Spa</span>
+            <span class="marquee-text">Luxury • Beauty • Spa</span>
+            <span class="marquee-text">Luxury • Beauty • Spa</span>
+            <span class="marquee-text">Luxury • Beauty • Spa</span>
+            <span class="marquee-text">Luxury • Beauty • Spa</span>
+        </div>
+    </div>
 
     <div class="brands-section">
         <div class="brands-track">
@@ -460,7 +538,7 @@
         <div class="section-header" data-aos="fade-up">
             <h2>خبيرات أرقان</h2>
             <p>فريق محترف تم اختياره بعناية لتدليلك</p>
-			</div>
+        </div>
 
         <div class="team-grid">
             
@@ -609,9 +687,8 @@
                 <div class="info-item">
                     <i class="far fa-clock" style="font-size: 1.5rem; color:var(--gold-primary); margin-bottom:10px;"></i>
                     <h4>ساعات العمل</h4>
-                    <p>السبت: 10:00 ص - 10:00 م</p>
-                    <p>الخميس - الجمعة: 11:00 ص - 10:00 م</p>
-                    <p>الأحد - الأربعاء: 01:00 م - 10:00 م</p>
+                    <p style="white-space: nowrap;">الأحد - الأربعاء: 02:00 م - 11:00 م</p>
+                    <p style="white-space: nowrap;">الخميس - السبت: 01:00 م - 10:00 م</p>
                 </div>
                 <div class="info-item">
                     <i class="fas fa-map-marker-alt" style="font-size: 1.5rem; color:var(--gold-primary); margin-bottom:10px;"></i>
@@ -620,9 +697,9 @@
                     <a href="https://maps.app.goo.gl/mErDL2aHtZc11eAZ7" target="_blank" class="map-btn">عرض على الخريطة</a>
                 </div>
                 <div class="info-item">
-                    <i class="fas fa-phone-alt" style="font-size: 1.5rem; color:var(--gold-primary); margin-bottom:10px;"></i>
-                    <h4>للحجز والاستفسار</h4>
-                    <a href="tel:0595648503" style="color:#ffffff !important; font-size:1.2rem; font-weight:bold; display:block; margin-top:5px; text-decoration: none;">0595648503</a>
+                    <i class="fas fa-phone" style="font-size: 2.5rem; color:var(--gold-primary); margin-bottom:15px; transform: scaleX(-1);"></i>
+                    <h4 style="font-size: 1.5rem; color: var(--gold-primary); margin-bottom: 10px;">للحجز والاستفسار</h4>
+                    <a href="tel:0595648503" class="phone-display">0595648503</a>
                 </div>
             </div>
         </div>
@@ -632,11 +709,15 @@
         <div class="logo" style="justify-content: center; margin-bottom: 20px;">ARGAN</div>
         <div class="footer-social">
             <a href="http://instagram.com/arqancenter_" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@arqan.center?_r=1&_t=ZS-91pT5zehVY7" target="_blank"><i class="fab fa-tiktok"></i></a>
             <a href="#"><i class="fab fa-snapchat-ghost"></i></a>
-            <a href="#"><i class="fab fa-tiktok"></i></a>
         </div>
         <p style="color: #aaa; font-size: 0.9rem;">© 2025 Argan Center. All Rights Reserved.</p>
     </footer>
+
+    <div class="welcome-bubble">
+        <i class="fas fa-hand-sparkles"></i> أهلاً بكِ.. نحن بخدمتك!
+    </div>
 
     <a href="https://wa.me/966595648503" target="_blank" class="whatsapp-float">
         <i class="fab fa-whatsapp"></i>
